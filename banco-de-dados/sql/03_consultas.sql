@@ -30,14 +30,17 @@ SELECT u.id,
        u.nome,
        u.email,
        (SELECT string_agg(g.nome, ', ' ORDER BY g.nome)
-          FROM usuario_grupo ug JOIN grupo g ON g.id = ug.grupo_id
+          FROM usuario_grupo ug
+          JOIN grupo g ON g.id = ug.grupo_id
          WHERE ug.usuario_id = u.id) AS grupos,
        (SELECT string_agg(p.nome, ', ' ORDER BY p.nome)
-          FROM usuario_papel up JOIN papel p ON p.id = up.papel_id
+          FROM usuario_papel up
+          JOIN papel p ON p.id = up.papel_id
          WHERE up.usuario_id = u.id) AS papeis,
        u.ultimo_acesso
 FROM usuario u
-WHERE u.nome ILIKE '%positivo%' OR u.email ILIKE '%positivo%'
+WHERE u.nome ILIKE '%positivo%'
+   OR u.email ILIKE '%positivo%'
 ORDER BY u.nome;
 
 -- 5) Opções do campo Grupo
@@ -48,17 +51,20 @@ SELECT id, nome FROM papel ORDER BY nome;
 
 -- 7) Adicionar usuário
 BEGIN;
-INSERT INTO usuario (email) VALUES ('maria.lima@positivo.com.br');
+INSERT INTO usuario (email)
+VALUES ('maria.lima@positivo.com.br');
 
 INSERT INTO usuario_grupo (usuario_id, grupo_id)
 SELECT u.id, g.id
 FROM usuario u, grupo g
-WHERE u.email = 'maria.lima@positivo.com.br' AND g.id IN (1, 4);
+WHERE u.email = 'maria.lima@positivo.com.br'
+  AND g.id IN (1, 4);
 
 INSERT INTO usuario_papel (usuario_id, papel_id)
 SELECT u.id, p.id
 FROM usuario u, papel p
-WHERE u.email = 'maria.lima@positivo.com.br' AND p.id IN (2);
+WHERE u.email = 'maria.lima@positivo.com.br'
+  AND p.id IN (2);
 COMMIT;
 
 -- 8) Carregar usuário para edição
@@ -128,7 +134,8 @@ SELECT u.id,
                WHERE x.usuario_id = u.id
                  AND x.grupo_id = 4) AS marcado,
        (SELECT string_agg(g.nome, ', ' ORDER BY g.nome)
-          FROM usuario_grupo ug JOIN grupo g ON g.id = ug.grupo_id
+          FROM usuario_grupo ug
+          JOIN grupo g ON g.id = ug.grupo_id
          WHERE ug.usuario_id = u.id) AS grupos
 FROM usuario u
 ORDER BY u.nome;
@@ -140,7 +147,8 @@ INSERT INTO grupo (nome) VALUES ('Análise de propostas');
 INSERT INTO grupo_permissao (grupo_id, permissao_id)
 SELECT g.id, p.id
 FROM grupo g, permissao p
-WHERE g.nome = 'Análise de propostas' AND p.id IN (6, 7, 9);
+WHERE g.nome = 'Análise de propostas'
+  AND p.id IN (6, 7, 9);
 
 INSERT INTO usuario_grupo (usuario_id, grupo_id)
 SELECT u.id, g.id

@@ -4,8 +4,8 @@
 CREATE TABLE usuario (
   id             bigint       GENERATED ALWAYS AS IDENTITY,
   email          varchar(254) NOT NULL,
-  nome           varchar(150),   -- vem do AD
-  ultimo_acesso  timestamp,      -- NULL = nunca acessou
+  nome           varchar(150),  -- vem do AD
+  ultimo_acesso  timestamp,  -- NULL = nunca acessou
   criado_em      timestamp    NOT NULL DEFAULT now(),
   atualizado_em  timestamp    NOT NULL DEFAULT now(),
   CONSTRAINT pk_usuario PRIMARY KEY (id),
@@ -15,9 +15,9 @@ CREATE TABLE usuario (
 );
 
 CREATE TABLE papel (
-  id         smallint     GENERATED ALWAYS AS IDENTITY,
-  nome       varchar(80)  NOT NULL,
-  criado_em  timestamp    NOT NULL DEFAULT now(),
+  id         smallint    GENERATED ALWAYS AS IDENTITY,
+  nome       varchar(80) NOT NULL,
+  criado_em  timestamp   NOT NULL DEFAULT now(),
   CONSTRAINT pk_papel PRIMARY KEY (id),
   CONSTRAINT uq_papel_nome UNIQUE (nome)
 );
@@ -43,16 +43,18 @@ CREATE TABLE funcionalidade (
   modulo_id  smallint     NOT NULL,
   nome       varchar(100) NOT NULL,
   CONSTRAINT pk_funcionalidade PRIMARY KEY (id),
-  CONSTRAINT uq_funcionalidade_nome UNIQUE (modulo_id, nome),
-  CONSTRAINT fk_funcionalidade_modulo FOREIGN KEY (modulo_id)
+  CONSTRAINT uq_funcionalidade_nome
+    UNIQUE (modulo_id, nome),
+  CONSTRAINT fk_funcionalidade_modulo
+    FOREIGN KEY (modulo_id)
     REFERENCES modulo (id) ON DELETE RESTRICT
 );
 
 CREATE TABLE permissao (
   id                 integer      GENERATED ALWAYS AS IDENTITY,
   funcionalidade_id  smallint     NOT NULL,
-  codigo             varchar(80)  NOT NULL,  -- usado no código
-  nome               varchar(120) NOT NULL,  -- texto do toggle
+  codigo             varchar(80)  NOT NULL, -- no app
+  nome               varchar(120) NOT NULL, -- na tela
   CONSTRAINT pk_permissao PRIMARY KEY (id),
   CONSTRAINT uq_permissao_codigo UNIQUE (codigo),
   CONSTRAINT uq_permissao_nome
@@ -69,7 +71,8 @@ CREATE TABLE usuario_grupo (
   criado_em   timestamp NOT NULL DEFAULT now(),
   CONSTRAINT pk_usuario_grupo
     PRIMARY KEY (usuario_id, grupo_id),
-  CONSTRAINT fk_usuario_grupo_usuario FOREIGN KEY (usuario_id)
+  CONSTRAINT fk_usuario_grupo_usuario
+    FOREIGN KEY (usuario_id)
     REFERENCES usuario (id) ON DELETE CASCADE,
   CONSTRAINT fk_usuario_grupo_grupo FOREIGN KEY (grupo_id)
     REFERENCES grupo (id) ON DELETE CASCADE
@@ -82,7 +85,8 @@ CREATE TABLE usuario_papel (
   criado_em   timestamp NOT NULL DEFAULT now(),
   CONSTRAINT pk_usuario_papel
     PRIMARY KEY (usuario_id, papel_id),
-  CONSTRAINT fk_usuario_papel_usuario FOREIGN KEY (usuario_id)
+  CONSTRAINT fk_usuario_papel_usuario
+    FOREIGN KEY (usuario_id)
     REFERENCES usuario (id) ON DELETE CASCADE,
   CONSTRAINT fk_usuario_papel_papel FOREIGN KEY (papel_id)
     REFERENCES papel (id) ON DELETE RESTRICT
@@ -95,7 +99,8 @@ CREATE TABLE grupo_permissao (
   criado_em     timestamp NOT NULL DEFAULT now(),
   CONSTRAINT pk_grupo_permissao
     PRIMARY KEY (grupo_id, permissao_id),
-  CONSTRAINT fk_grupo_permissao_grupo FOREIGN KEY (grupo_id)
+  CONSTRAINT fk_grupo_permissao_grupo
+    FOREIGN KEY (grupo_id)
     REFERENCES grupo (id) ON DELETE CASCADE,
   CONSTRAINT fk_grupo_permissao_permissao
     FOREIGN KEY (permissao_id)

@@ -2,8 +2,7 @@
 
 | Arquivo | Conteúdo |
 |---|---|
-| `Trabalho_BD_Seguranca_e_Permissoes.pdf` | Entrega: modelo conceitual, modelo físico e consultas SQL |
-| `modelo-conceitual.png` | Imagem do modelo conceitual |
+| `Trabalho_BD_Seguranca_e_Permissoes.pdf` | Entrega: modelo físico e consultas SQL |
 | `modelo-fisico.png` | Imagem do modelo físico |
 | `sql/01_modelo_fisico.sql` | Criação das tabelas |
 | `sql/02_dados_exemplo.sql` | Dados de exemplo |
