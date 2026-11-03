@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autenticação | Grupo X</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cenário de fundo com camadas de paralaxe (decorativo) -->
+  <div class="scene" aria-hidden="true">
+    <div class="layer" data-depth="18">
+      <span class="blob b1"></span>
+      <span class="blob b2"></span>
+      <span class="blob b3"></span>
+    </div>
+    <div class="layer" data-depth="40">
+      <span class="blob b4"></span>
+      <span class="blob b5"></span>
+    </div>
+    <div class="layer" data-depth="75">
+      <span class="orb o1"></span>
+      <span class="orb o2"></span>
+      <span class="orb o3"></span>
+      <span class="orb o4"></span>
+    </div>
+    <div class="grain"></div>
+  </div>
+
+  <main class="stage">
+    <div class="container" id="container">
+      <span class="sheen" aria-hidden="true"></span>
+
+      <!-- ===== Tela de Autenticação (Login) ===== -->
+      <div class="form-box login">
+        <form id="loginForm" autocomplete="on">
+          <h1>Autenticação</h1>
+
+          <div class="input-box">
+            <input type="text" name="username" placeholder="Username" aria-label="Username" autocomplete="username" required>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.4 0-8 2.3-8 5.2V21h16v-1.8c0-2.9-3.6-5.2-8-5.2Z"/></svg>
+          </div>
+
+          <div class="input-box">
+            <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2Zm-7-2a2 2 0 1 1 4 0v2h-4V7Z"/></svg>
+          </div>
+
+          <div class="forgot-link">
+            <a href="#" id="forgotLink">Esqueceu a Senha?</a>
+          </div>
+
+          <button type="submit" class="btn primary"><span class="label">Login</span></button>
+        </form>
+      </div>
+
+      <!-- ===== Tela de Cadastro (Inscreva-se) ===== -->
+      <div class="form-box register">
+        <form id="registerForm" autocomplete="on">
+          <h1>Inscreva-se</h1>
+
+          <div class="input-box">
+            <input type="text" name="username" placeholder="Username" aria-label="Username" autocomplete="username" required>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.4 0-8 2.3-8 5.2V21h16v-1.8c0-2.9-3.6-5.2-8-5.2Z"/></svg>
+          </div>
+
+          <div class="input-box">
+            <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4.2-8 5-8-5V6l8 5 8-5v2.2Z"/></svg>
+          </div>
+
+          <div class="input-box">
+            <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="new-password" required>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2Zm-7-2a2 2 0 1 1 4 0v2h-4V7Z"/></svg>
+          </div>
+
+          <button type="submit" class="btn primary"><span class="label">Cadastre-se</span></button>
+        </form>
+      </div>
+
+      <!-- ===== Painel azul deslizante ===== -->
+      <div class="toggle-box">
+        <div class="toggle-panel toggle-left">
+          <h1>Bem-vindo a solução do <span class="group-name">Grupo X</span>!</h1>
+          <p>Sem conta? Cadastre-se agora!</p>
+          <button type="button" class="btn ghost register-btn">Cadastre-se</button>
+        </div>
+
+        <div class="toggle-panel toggle-right">
+          <h1>Bem-vindo de volta!</h1>
+          <p>Já tem uma conta?</p>
+          <button type="button" class="btn ghost login-btn">Login</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
